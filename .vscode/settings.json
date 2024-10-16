@@ -101,5 +101,13 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "cstddef": "cpp",
+    "*.tcc": "cpp",
+    "memory_resource": "cpp",
+    "memory": "cpp",
+    "ostream": "cpp",
+    "streambuf": "cpp"
+  }
 }
