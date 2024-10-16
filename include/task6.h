@@ -8,6 +8,8 @@
 #include <stdlib.h> 
 #include "testdata.h"
 #include "util.h"
+#include "LittleFS.h"
+
 
 void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192, BlockCipher *aes256, const int iterations);
 

@@ -7,6 +7,7 @@
 #include "config.h"
 #include "task6.h"
 #include "task7.h"
+#include "task8.h"
 
 AES128 aes128;
 AES192 aes192;
@@ -27,8 +28,8 @@ void setup_wifi() {
     Serial.println(WiFi.localIP());
 
     // Define HTTP route to serve the file
-    server.on("/download", HTTP_GET, []() {
-        File file = LittleFS.open("/data.csv", "r");
+    server.on("/task8", HTTP_GET, []() {
+        File file = LittleFS.open("/task8.csv", "r");
         if (!file) {
             server.send(404, "text/plain", "File not found");
             return;
@@ -36,11 +37,25 @@ void setup_wifi() {
         server.streamFile(file, "text/plain");
         file.close();
     });
-    server.on("/", HTTP_GET, []() {
-        server.send(200, "text/plain", "Hello, World! The server is working.");
+    server.on("/task7", HTTP_GET, []() {
+        File file = LittleFS.open("/task7.csv", "r");
+        if (!file) {
+            server.send(404, "text/plain", "File not found");
+            return;
+        }
+        server.streamFile(file, "text/plain");
+        file.close();
     });
-
-    server.begin();  // Start the web server
+    server.on("/task6", HTTP_GET, []() {
+        File file = LittleFS.open("/task6.csv", "r");
+        if (!file) {
+            server.send(404, "text/plain", "File not found");
+            return;
+        }
+        server.streamFile(file, "text/plain");
+        file.close();
+    });
+    server.begin();
     Serial.println("Starting to serve.");
 }
 
@@ -61,17 +76,22 @@ void run_tests() {
     delay(500);
     compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
     delay(500);
+    performBenchmark();
+    delay(500);
 }
 
 void setup() {
     delay(1000);
     Serial.begin(9600);
+    Serial.println();
     setup_file_sytem();
     delay(500);
     run_tests();
+    delay(500);
     setup_wifi();
 }
 
 void loop() {
     server.handleClient();  // Handle incoming client requests
+    yield();
 }

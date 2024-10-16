@@ -16,7 +16,7 @@ void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192,
 
     fillArrayWithRandomData(randomKey, sizeof(randomKey));
 
-    Serial.println("------------- TASK 7 -------------");
+    Serial.println("------------- TASK 6 -------------");
     for (int i = 0; i < iterations; ++i) {
         fillArrayWithRandomData(randomPlaintext, sizeof(randomPlaintext));
         aes128->setKey(randomKey, aes128->keySize());
@@ -79,6 +79,19 @@ void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192,
     Serial.printf(
         "AES-256 Average Time: %.6f ms per Decryption and Encryption\n",
         avg256decryption / 1000.0);
+    
+    File file = LittleFS.open("/task6.csv", "w");
+    if (!file) {
+        Serial.println("Failed to open file for reading");
+        return;
+    }
+    file.printf("AES-128, %.6f, %.6f\n", avg128encryption / 1000.0,
+                avg128decryption / 1000.0);
+    file.printf("AES-192, %.6f, %.6f\n", avg192encryption / 1000.0,
+                avg192decryption / 1000.0);
+    file.printf("AES-256, %.6f, %.6f\n", avg256encryption / 1000.0,
+                avg256decryption / 1000.0);
+    file.close();
 
     Serial.println("------------- End -------------");
 }

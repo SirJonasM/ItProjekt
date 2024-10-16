@@ -4,3 +4,6 @@
 .vscode/launch.json
 .vscode/ipch
 config.h
+*.csv
+*__pycache__
+*.env

@@ -14,11 +14,7 @@ void compareAESPerformanceTask7(BlockCipher *aes128, BlockCipher *aes192,
     byte decryption[16];
     byte encryption[16];
 
-    File file = LittleFS.open("/data.csv", "w");
-    if (!file) {
-        Serial.println("Failed to open file for reading");
-        return;
-    }
+    
 
     Serial.println("------------- TASK 7 -------------");
     for (int i = 0; i < iterations; ++i) {
@@ -85,18 +81,17 @@ void compareAESPerformanceTask7(BlockCipher *aes128, BlockCipher *aes192,
         "AES-256 Average Time: %.6f ms per Decryption and Encryption\n",
         avg256decryption / 1000.0);
 
-    // Format the AES-128 result and write it to the file
+    File file = LittleFS.open("/task7.csv", "w");
+    if (!file) {
+        Serial.println("Failed to open file for reading");
+        return;
+    }
     file.printf("AES-128, %.6f, %.6f\n", avg128encryption / 1000.0,
                 avg128decryption / 1000.0);
-
-    // Format the AES-192 result and write it to the file
     file.printf("AES-192, %.6f, %.6f\n", avg192encryption / 1000.0,
                 avg192decryption / 1000.0);
-
-    // Format the AES-256 result and write it to the file
     file.printf("AES-256, %.6f, %.6f\n", avg256encryption / 1000.0,
                 avg256decryption / 1000.0);
-
     file.close();
 
     Serial.println("------------- End -------------");

@@ -10,5 +10,8 @@
 #include <XTS.h>
 #include "testdata.h"
 #include "util.h"
+#include "LittleFS.h"
+
+void performBenchmark();
 
 #endif
