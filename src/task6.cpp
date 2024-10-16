@@ -1,6 +1,7 @@
 #include "task6.h"
 
-void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192, BlockCipher *aes256, const int iterations) {
+void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192,
+                                BlockCipher *aes256, const int iterations) {
     unsigned long start;
     unsigned long encryption128 = 0;
     unsigned long encryption192 = 0;
@@ -17,23 +18,23 @@ void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192, BlockC
 
     Serial.println("------------- TASK 7 -------------");
     for (int i = 0; i < iterations; ++i) {
-        fillArrayWithRandomData(randomPlaintext, sizeof(randomPlaintext)); 
+        fillArrayWithRandomData(randomPlaintext, sizeof(randomPlaintext));
         aes128->setKey(randomKey, aes128->keySize());
         aes192->setKey(randomKey, aes192->keySize());
         aes256->setKey(randomKey, aes256->keySize());
-        
+
         start = micros();
         aes128->encryptBlock(encryption, randomPlaintext);
         encryption128 += micros() - start;
-        
+
         start = micros();
         aes128->decryptBlock(decryption, encryption);
         decryption128 += micros() - start;
-    
+
         start = micros();
         aes192->encryptBlock(encryption, randomPlaintext);
         encryption192 += micros() - start;
-        
+
         start = micros();
         aes192->decryptBlock(decryption, encryption);
         decryption192 += micros() - start;
@@ -41,12 +42,12 @@ void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192, BlockC
         start = micros();
         aes256->encryptBlock(encryption, randomPlaintext);
         encryption256 += micros() - start;
-        
+
         start = micros();
         aes256->decryptBlock(decryption, encryption);
         decryption256 += micros() - start;
     }
-    
+
     // Calculate average time
     float avg128encryption = (float)encryption128 / iterations;
     float avg128decryption = (float)decryption128 / iterations;
@@ -58,14 +59,26 @@ void compareAESPerformanceTask6(BlockCipher *aes128, BlockCipher *aes192, BlockC
     float avg256decryption = (float)decryption256 / iterations;
 
     // Print average time
-    Serial.printf("AES-128 Average Time: %.6f ms per Decryption and Encryption\n", avg128encryption / 1000.0);
-    Serial.printf("AES-128 Average Time: %.6f ms per Decryption and Encryption\n", avg128decryption / 1000.0);
+    Serial.printf(
+        "AES-128 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg128encryption / 1000.0);
+    Serial.printf(
+        "AES-128 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg128decryption / 1000.0);
 
-    Serial.printf("AES-192 Average Time: %.6f ms per Decryption and Encryption\n", avg192encryption / 1000.0);
-    Serial.printf("AES-192 Average Time: %.6f ms per Decryption and Encryption\n", avg192decryption / 1000.0);
+    Serial.printf(
+        "AES-192 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg192encryption / 1000.0);
+    Serial.printf(
+        "AES-192 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg192decryption / 1000.0);
 
-    Serial.printf("AES-256 Average Time: %.6f ms per Decryption and Encryption\n", avg256encryption / 1000.0);
-    Serial.printf("AES-256 Average Time: %.6f ms per Decryption and Encryption\n", avg256decryption / 1000.0);
+    Serial.printf(
+        "AES-256 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg256encryption / 1000.0);
+    Serial.printf(
+        "AES-256 Average Time: %.6f ms per Decryption and Encryption\n",
+        avg256decryption / 1000.0);
 
     Serial.println("------------- End -------------");
 }

@@ -109,5 +109,5 @@
     "memory": "cpp",
     "ostream": "cpp",
     "streambuf": "cpp"
-  }
+  },
 }

@@ -1,19 +1,18 @@
 #include <AES.h>
+#include <ESP8266WebServer.h>
+#include <ESP8266WiFi.h>
+#include <stdlib.h>
 #include <string.h>
-#include <stdlib.h> 
+
+#include "config.h"
 #include "task6.h"
 #include "task7.h"
-#include <ESP8266WiFi.h>
-#include <ESP8266WebServer.h>
-#include "config.h"
 
 AES128 aes128;
 AES192 aes192;
 AES256 aes256;
 
-
 ESP8266WebServer server(80);  // Create a web server on port 80
-
 
 void setup_wifi() {
     WiFi.begin(ssid, password);
@@ -45,30 +44,30 @@ void setup_wifi() {
     Serial.println("Starting to serve.");
 }
 
-void setup_file_sytem(){
-  if (!LittleFS.begin()) {
-      Serial.println("LittleFS Mount Failed, trying to format...");
-      LittleFS.format();
-      if (!LittleFS.begin()) {
-          Serial.println("Reformatting failed!");
-          return;
-      }
-  }
-  Serial.println("Setup successfull");
+void setup_file_sytem() {
+    if (!LittleFS.begin()) {
+        Serial.println("LittleFS Mount Failed, trying to format...");
+        LittleFS.format();
+        if (!LittleFS.begin()) {
+            Serial.println("Reformatting failed!");
+            return;
+        }
+    }
+    Serial.println("Setup successfull");
 }
 
-void run_tests(){
+void run_tests() {
     compareAESPerformanceTask6(&aes128, &aes192, &aes256, 1000);
-    delay(500); 
+    delay(500);
     compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
-    delay(500); 
+    delay(500);
 }
 
 void setup() {
     delay(1000);
     Serial.begin(9600);
     setup_file_sytem();
-    delay(500); 
+    delay(500);
     run_tests();
     setup_wifi();
 }
