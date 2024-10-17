@@ -72,12 +72,11 @@ void setup_file_sytem() {
 }
 
 void run_tests() {
-    compareAESPerformanceTask6(&aes128, &aes192, &aes256, 1000);
-    delay(500);
-    compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
-    delay(500);
+    // compareAESPerformanceTask6(&aes128, &aes192, &aes256, 1000);
+    // delay(500);
+    // compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
+    // delay(500);
     performBenchmark();
-    delay(500);
 }
 
 void setup() {
@@ -89,9 +88,10 @@ void setup() {
     run_tests();
     delay(500);
     setup_wifi();
+    delay(100);
 }
 
 void loop() {
-    server.handleClient();  // Handle incoming client requests
+    server.handleClient();
     yield();
 }

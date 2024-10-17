@@ -108,6 +108,18 @@
     "memory_resource": "cpp",
     "memory": "cpp",
     "ostream": "cpp",
-    "streambuf": "cpp"
+    "streambuf": "cpp",
+    "array": "cpp",
+    "string_view": "cpp",
+    "initializer_list": "cpp",
+    "ranges": "cpp",
+    "utility": "cpp",
+    "deque": "cpp",
+    "list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "system_error": "cpp",
+    "variant": "cpp"
   },
 }

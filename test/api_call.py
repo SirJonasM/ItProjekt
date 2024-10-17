@@ -19,3 +19,6 @@ def make_api_call():
         print("File 'task8.csv' successfully downloaded and saved.")
     else:
         print(f"Failed to retrieve the file. Status code: {response.status_code}")
+
+if __name__ == "main":
+    make_api_call()
