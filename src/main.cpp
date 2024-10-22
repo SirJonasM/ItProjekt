@@ -72,10 +72,10 @@ void setup_file_sytem() {
 }
 
 void run_tests() {
-    // compareAESPerformanceTask6(&aes128, &aes192, &aes256, 1000);
-    // delay(500);
-    // compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
-    // delay(500);
+    compareAESPerformanceTask6(&aes128, &aes192, &aes256, 1000);
+    delay(500);
+    compareAESPerformanceTask7(&aes128, &aes192, &aes256, 1000);
+    delay(500);
     performBenchmark();
 }
 

@@ -238,21 +238,20 @@ void performBenchmark() {
         return;
     }
     file.println("Mode,AES128 Encrypt,AES128 Decrypt,AES192 Encrypt,AES192 Decrypt,AES256 Encrypt,AES256 Decrypt,Buffer Length");
-    for (; size<=32768; size*=2){
+    for (int i = 4; size < 16; i++) {
         for (int i = 0; i < 10; i++) {
             Times times = Times{};
-            fillArrayWithRandomData(PLAINTEXT_BUFFER, size);
+            fillArrayWithRandomData(PLAINTEXT_BUFFER, 1 << size);
             bench(&times, size);
-            file.printf("CTR,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Ctr128Encrypt, times.Ctr128Decrypt, times.Ctr192Encrypt, times.Ctr192Decrypt, times.Ctr256Encrypt, times.Ctr256Decrypt,size);
-            file.printf("Eax,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Eax128Encrypt, times.Eax128Decrypt, times.Eax192Encrypt, times.Eax192Decrypt, times.Eax256Encrypt, times.Eax256Decrypt,size);
-            file.printf("GCM,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Gcm128Encrypt, times.Gcm128Decrypt, times.Gcm192Encrypt, times.Gcm192Decrypt, times.Gcm256Encrypt, times.Gcm256Decrypt,size);
-            file.printf("XTS,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Xts128Encrypt, times.Xts128Decrypt, times.Xts192Encrypt, times.Xts192Decrypt, times.Xts256Encrypt, times.Xts256Decrypt,size);
+            file.printf("CTR,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Ctr128Encrypt, times.Ctr128Decrypt, times.Ctr192Encrypt, times.Ctr192Decrypt, times.Ctr256Encrypt, times.Ctr256Decrypt, size);
+            file.printf("Eax,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Eax128Encrypt, times.Eax128Decrypt, times.Eax192Encrypt, times.Eax192Decrypt, times.Eax256Encrypt, times.Eax256Decrypt, size);
+            file.printf("GCM,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Gcm128Encrypt, times.Gcm128Decrypt, times.Gcm192Encrypt, times.Gcm192Decrypt, times.Gcm256Encrypt, times.Gcm256Decrypt, size);
+            file.printf("XTS,%lu,%lu,%lu,%lu,%lu,%lu,%zu\n", times.Xts128Encrypt, times.Xts128Decrypt, times.Xts192Encrypt, times.Xts192Decrypt, times.Xts256Encrypt, times.Xts256Decrypt, size);
             yield();
-            // printProgressBar(i, iterations);
         }
+        printProgressBar(i, 10);
     }
     file.close();
 }
 
-
-// 16, 32, 64, 128, 256, 512, 1024, 2056, 4112, 8224 
+// 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768

@@ -1,8 +1,9 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include <Arduino.h>  // Make sure this is included
-#include <stddef.h>   // For size_t
+#include <Arduino.h>
+#include <stddef.h>
+
 void fillArrayWithRandomData(byte *buffer, size_t length);
 
 #endif
