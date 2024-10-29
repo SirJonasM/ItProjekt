@@ -92,7 +92,7 @@ Now, you need to create a `.env` file in the `./test/` directory.
 3. Inside the `.env` file, add the following line:
 
    ```bash
-   API_URL=http://<ip-address>/task8
+   API_URL=http://<ip-address>/
    ```
 
    Replace `<ip-address>` with the IP address printed by the ESP8266 in the serial monitor.
