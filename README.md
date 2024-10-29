@@ -102,10 +102,13 @@ Now, you need to create a `.env` file in the `./test/` directory.
 With the `.env` file configured, you're ready to run the Python script to plot the data:
 
 1. Open a terminal in VS Code (by clicking **Terminal > New Terminal** in the top menu).
-2. Run the plotting script by typing:
+2. Run the plotting scripts:
 
    ```bash
    python ./test/plot.py
+   python ./test/plot_lines.py
+   python ./test/task6.py
+   python ./test/task7.py
    ```
 
 This script will fetch data from the ESP8266 using the API URL and plot the data using `matplotlib`.
